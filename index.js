@@ -26,12 +26,14 @@ program
     .description("Add a task to your list")
     .action((task) => {
         const tasks = getTasks();
-        tasks.push({
-            id: tasks.length + 1,
-            content: task
-        });
+
+        const nextId = tasks.length > 0 ? Math.max(... tasks.map(t => t.id)) + 1 : 1;
+
+        tasks.push({id: nextId, content: task});
+        
         saveTasks(tasks);
-        console.log(chalk.green("Task added to your list"))
+
+        console.log(chalk.green("Task added to your list"));
     });
 
 program
