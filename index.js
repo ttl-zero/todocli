@@ -66,4 +66,13 @@ program
         }
     });
 
+program
+    .command("flush")
+    .description("Flushes your todo list")
+    .action(() => {
+        saveTasks([]);
+        console.log(chalk.bgGray(`Your to-do list has been flushed.`));
+        }
+    );
+
 program.parse()
