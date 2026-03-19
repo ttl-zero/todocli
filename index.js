@@ -85,6 +85,26 @@ program
     });
 
 program
+    .command("edit <id> <newContent>")
+    .description("Edit a task's text")
+    .action((id, newContent) => {
+        let tasks = getTasks();
+        const task = tasks.find(t => t.id === Number(id));
+        if(task) {
+            const oldContent = task.content;
+            task.content = newContent;
+            saveTasks(tasks)
+
+            console.log(chalk.green(`Task ${id} updated`))
+            console.log(chalk.gray(`From: ${oldContent}`))
+            console.log(chalk.yellow(`To: ${newContent}`))
+            
+        } else {
+            console.log(chalk.red(`Error: Task with ID ${id} not found.`))
+        }
+    });
+
+program
     .command("flush")
     .description("Nuclear option: wipe everything out")
     .action(() => {
