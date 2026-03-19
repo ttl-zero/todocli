@@ -3,8 +3,10 @@
 const fs = require('fs')
 const { default: chalk } = require("chalk");
 const { program } = require("commander");
+const path = require('path');
+const os = require('os');
+const FILE_PATH = path.join(os.homedir(), '.todo-tasks.json');
 
-const FILE_PATH = './tasks.json';
 
 const getTasks = () => {
     if (!fs.existsSync(FILE_PATH)) return [];
